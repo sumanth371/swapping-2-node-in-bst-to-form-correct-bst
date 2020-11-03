@@ -1,0 +1,75 @@
+package eye;
+class Node{
+	int data;
+	Node left;
+	Node right;
+	Node(int item){
+		data=item;
+		left=null;
+		right=null;
+	}
+	
+}
+public class correctbst {
+	Node root;
+	Node first,mid,last,prev;
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 Node root = new Node(6);
+	        root.left = new Node(10);
+	        root.right = new Node(2);
+	        root.left.left = new Node(1);
+	        root.left.right = new Node(3);
+	        root.right.right = new Node(12);
+	        root.right.left = new Node(7);
+	 
+	    correctbst b=new correctbst();
+	    b.swap(root);
+	    b.inorder(root);
+	    
+
+	}
+	public void correct(Node root) {
+		if(root!=null) {
+		correct(root.left);
+		
+		if(prev!=null && root.data<prev.data) {
+			if(first==null) {
+				first=prev;
+				mid=root;
+			}
+			else {
+				last=root;
+			}
+		}
+		prev=root;
+		correct(root.right);
+		}
+	}
+	 void swap(Node root) {
+		first=mid=last=prev=null;
+		correct(root);
+		if(first!=null &&last!=null) {
+			int temp=first.data;
+			first.data=last.data;
+			last.data=temp;
+		}
+		else if(mid!=null && first!=null) {
+			int temp=first.data;
+			first.data=mid.data;
+			mid.data=temp;
+		}
+		
+		
+	}
+	 void inorder(Node root) {
+		 if (root == null)
+	            return;
+		 inorder(root.left);
+		 System.out.print(" "+root.data);
+		 inorder(root.right);
+		 
+	 }
+
+}
